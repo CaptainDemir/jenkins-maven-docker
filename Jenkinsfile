@@ -1,27 +1,27 @@
-pipeline{
-    environment{
+pipeline {
+    environment {
         JAVA_TOOL_OPTIONS = "-Demir.home=/home/jenkins"
     }
-    agent{
-        dockerfile{
+    agent {
+        dockerfile {
             label "docker"
             args "-v /tmp/maven:/home/jenkins/.m2 -e MAVEN_CONFIG=/home/jenkins/.m2"
         }
     }
-    stages{
-        stage("Build"){
-            steps{
+
+    stages {
+        stage("Build") {
+            steps {
                 sh "ssh -V"
-                sh "mvn --version"
+                sh "mvn -version"
                 sh "mvn clean install"
             }
-          
         }
     }
-    post{
-        always{
+
+    post {
+        always {
             cleanWs()
         }
-
     }
 }
