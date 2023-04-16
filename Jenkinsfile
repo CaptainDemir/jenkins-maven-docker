@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        JAVA_TOOL_OPTIONS = "-Demir.home=/home/jenkins"
+        JAVA_TOOL_OPTIONS = "-Duser.home=/home/jenkins"
     }
     agent {
         dockerfile {
@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage("Build") {
             steps {
-               
+                sh "ssh -V"
                 sh "mvn -version"
                 sh "mvn clean install"
             }
@@ -24,4 +24,4 @@ pipeline {
             cleanWs()
         }
     }
-}
+}qq
